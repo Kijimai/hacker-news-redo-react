@@ -26,17 +26,35 @@ const initialState = {
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  // const fetchStories = async (url) => {
-  //   dispatch({type: SET_LOADING})
-  //   try {
-  //     const response = await axios(url)
-  //     console.log(response)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+  const fetchStories = async (url) => {
+    dispatch({ type: SET_LOADING })
+    try {
+      const response = await axios(url)
+      if (response.status >= 200 && response.status <= 299) {
+        const { hits, nbPages } = response.data
+        dispatch({
+          type: SET_STORIES,
+          payload: { hits: hits, numPages: nbPages },
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
-    axios(`${API_ENDPOINT}`)
-    .then(data => console.log(data))
-  },[])
+    fetchStories(`${API_ENDPOINT}`)
+  }, [state.query, state.page])
+ 
+  return (
+    <AppContext.Provider value={{ ...state, fetchStories }}>
+      {children}
+    </AppContext.Provider>
+  )
 }
+
+export const useGlobalContext = () => {
+  return useContext(AppContext)
+}
+
+export { AppProvider, AppContext }

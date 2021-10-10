@@ -23,6 +23,8 @@ body {
   font-family: "Noto Sans", sans-serif;
 }
 
+// Base Styles
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -31,27 +33,27 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
 .pagination-container {
   max-width: 20rem;
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .btn {
+      padding: 1rem 2rem;
+      cursor: pointer;
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+  .searchPage-container {
+    .page-input {
+      width: 100%;
+    }
+  }
 }
-.pagination-container .btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.pagination-container .btn-container .btn {
-  padding: 1rem 2rem;
-  cursor: pointer;
-}
-.pagination-container .btn-container .btn:disabled {
-  cursor: not-allowed;
-}
-.pagination-container .searchPage-container .page-input {
-  width: 100%;
-}
-
-/*# sourceMappingURL=App.css.map */

@@ -1,23 +1,22 @@
 import { useEffect } from "react"
 import axios from "axios"
+import {
+  Buttons,
+  SearchForm,
+  SearchPage,
+  Stories,
+  Paginator,
+} from "./components/ComponentIndex"
 import "./App.css"
 
 function App() {
-  useEffect(() => {
-    axios("https://hn.algolia.com/api/v1/search?")
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          const response = res.data
-          console.log(response, res)
-        } else {
-          throw new Error(res.statusText)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
-  return <div className="App"></div>
+  return (
+    <>
+      <SearchForm />
+      <Paginator />
+      <Stories />
+    </>
+  )
 }
 
 export default App
