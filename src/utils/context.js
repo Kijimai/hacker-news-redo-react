@@ -4,6 +4,7 @@ import axios from "axios"
 import {
   SET_LOADING,
   SET_STORIES,
+  SET_STARTED,
   REMOVE_STORY,
   HANDLE_PAGE,
   HANDLE_SEARCH,
@@ -21,6 +22,7 @@ const initialState = {
   query: "",
   page: 0,
   numPages: 0,
+  justStarted: true,
 }
 
 const AppProvider = ({ children }) => {
@@ -43,9 +45,14 @@ const AppProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    fetchStories(`${API_ENDPOINT}`)
-  }, [state.query, state.page])
- 
+    if (state.justStarted) {
+      fetchStories(`http://hn.algolia.com/api/v1/search_by_date?tags=story`)
+      dispatch({ type: SET_STARTED })
+    } else {
+      fetchStories(`${API_ENDPOINT}`)
+    }
+  }, [state.query, state.page, state.justStarted])
+
   return (
     <AppContext.Provider value={{ ...state, fetchStories }}>
       {children}
