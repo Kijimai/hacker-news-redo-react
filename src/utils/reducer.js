@@ -4,7 +4,6 @@ import {
   HANDLE_PAGE,
   HANDLE_SEARCH,
   REMOVE_STORY,
-  SET_STARTED,
 } from "./actions"
 
 export const reducer = (state, action) => {
@@ -17,11 +16,9 @@ export const reducer = (state, action) => {
     case HANDLE_PAGE:
       return { ...state }
     case HANDLE_SEARCH:
-      return { ...state, query: action.payload, justStarted: false }
+      return { ...state, query: action.payload}
     case REMOVE_STORY:
       return { ...state }
-    case SET_STARTED:
-      return { ...state, justStarted: false }
     default:
       throw new Error(`Could not find matching ${action.type} action`)
   }

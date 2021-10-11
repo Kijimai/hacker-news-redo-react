@@ -46,13 +46,12 @@ const AppProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    if (state.justStarted) {
-      fetchStories(`http://hn.algolia.com/api/v1/search_by_date?tags=story`)
-    } else {
-      dispatch({ type: SET_STARTED })
+    if (state.query === "") {
       fetchStories(`${API_ENDPOINT}`)
+    } else {
+      fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`)
     }
-  }, [state.query, state.page, state.justStarted])
+  }, [state.query, state.page])
 
   const handleSearch = (query) => {
     dispatch({ type: HANDLE_SEARCH, payload: query, page: 0 })

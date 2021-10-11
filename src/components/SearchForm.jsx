@@ -5,7 +5,7 @@ const SearchForm = () => {
   const { query, handleSearch } = useGlobalContext()
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <h2>Find a story</h2>
+      <h2>Search for a story</h2>
       <input
         type="text"
         className="form-input"
