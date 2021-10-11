@@ -34,9 +34,10 @@ const AppProvider = ({ children }) => {
       const response = await axios(url)
       if (response.status >= 200 && response.status <= 299) {
         const { hits, nbPages } = response.data
+        const filteredHits = hits.filter((hit) => hit.url !== null)
         dispatch({
           type: SET_STORIES,
-          payload: { hits: hits, numPages: nbPages },
+          payload: { hits: filteredHits, numPages: nbPages },
         })
       }
     } catch (err) {
@@ -47,14 +48,18 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     if (state.justStarted) {
       fetchStories(`http://hn.algolia.com/api/v1/search_by_date?tags=story`)
-      dispatch({ type: SET_STARTED })
     } else {
+      dispatch({ type: SET_STARTED })
       fetchStories(`${API_ENDPOINT}`)
     }
   }, [state.query, state.page, state.justStarted])
 
+  const handleSearch = (query) => {
+    dispatch({ type: HANDLE_SEARCH, payload: query, page: 0 })
+  }
+
   return (
-    <AppContext.Provider value={{ ...state, fetchStories }}>
+    <AppContext.Provider value={{ ...state, fetchStories, handleSearch }}>
       {children}
     </AppContext.Provider>
   )
@@ -65,3 +70,6 @@ export const useGlobalContext = () => {
 }
 
 export { AppProvider, AppContext }
+
+//OCT 10 -
+// Filter out fetched stories that don't have a url

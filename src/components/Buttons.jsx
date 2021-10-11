@@ -13,7 +13,7 @@ const Buttons = () => {
       <button disabled={isLoading} className="btn">
         Prev
       </button>
-      <p>page #</p>
+      <p>Page {page + 1}</p>
       <button disabled={isLoading} className="btn">
         Next
       </button>

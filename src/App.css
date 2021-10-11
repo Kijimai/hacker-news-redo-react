@@ -5,6 +5,7 @@
   --color-primary: hsl(39, 100%, 53%);
   --color-primary-light: hsl(39, 84%, 71%);
   --color-primary-dark: hsl(39, 58%, 45%);
+  --box-shadow: hsla(0, 0%, 25%, 0.5);
   --transition: all 0.3s ease;
   --effect: hover 1s linear infinite;
 }
@@ -55,6 +56,36 @@ input[type=number] {
   width: 100%;
 }
 
+.top-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.stories {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 1rem 2rem;
+}
+.stories .story-container {
+  font-size: 1.2rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  box-shadow: none;
+  transition: 0.3s box-shadow ease;
+}
+.stories .story-container:hover {
+  box-shadow: 0.5rem 0.5rem 1rem var(--box-shadow);
+}
+
+@media screen and (min-width: 768px) {
+  .stories {
+    margin: 1rem 10vw;
+  }
+}
 .loader {
   text-align: center;
 }

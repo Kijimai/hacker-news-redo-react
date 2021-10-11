@@ -17,7 +17,7 @@ export const reducer = (state, action) => {
     case HANDLE_PAGE:
       return { ...state }
     case HANDLE_SEARCH:
-      return { ...state, justStarted: false }
+      return { ...state, query: action.payload, justStarted: false }
     case REMOVE_STORY:
       return { ...state }
     case SET_STARTED:

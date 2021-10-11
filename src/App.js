@@ -6,6 +6,7 @@ import {
   SearchPage,
   Stories,
   Paginator,
+  Header,
 } from "./components/ComponentIndex"
 import "./App.css"
 
@@ -13,7 +14,7 @@ function App() {
   return (
     <>
       <SearchForm />
-      <Paginator />
+      <Header />
       <Stories />
     </>
   )
